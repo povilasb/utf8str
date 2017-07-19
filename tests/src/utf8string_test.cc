@@ -56,3 +56,16 @@ SCENARIO("one can iterate over string characters") {
         }
     }
 }
+
+SCENARIO("substring is searched in a string") {
+    GIVEN("some string and a substring") {
+        utf8::str str(u8"aąbcčdef");
+        utf8::str substr(u8"čde");
+
+        WHEN("substring exists") {
+            THEN(".find() returns it's position") {
+                REQUIRE(str.find(substr).value() == 4);
+            }
+        }
+    }
+}

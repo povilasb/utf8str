@@ -2,6 +2,8 @@
 
 #include <cstddef>
 #include <cstdint>
+#include <experimental/optional>
+#include <iterator>
 
 namespace utf8
 {
@@ -27,6 +29,7 @@ public:
     size_t size() const;
     str_iterator begin() const noexcept;
     str_iterator end() const noexcept;
+    std::experimental::optional<size_t> find(const str& needle) const noexcept;
 };
 
 class str_iterator

@@ -55,6 +55,27 @@ str_iterator str::end() const noexcept
     return str_iterator(*this, true);
 }
 
+std::experimental::optional<size_t>
+str::find(const str& needle) const noexcept
+{
+    size_t pos = 0;
+    for (auto it1 = this->begin(); it1 != this->end(); ++it1) {
+        str_iterator it1_1(it1);
+        auto it2 = needle.begin();
+        for (; it2 != needle.end(); ++it2) {
+            if (*it2 != *it1_1) {
+                break;
+            }
+            ++it1_1;
+        }
+        if (it2.past_end()) {
+            return pos;
+        }
+        ++pos;
+    }
+    return {};
+}
+
 str_iterator::str_iterator(const str& str_, bool end) noexcept : str_(str_),
     str_offset(0), past_end_(false)
 {
